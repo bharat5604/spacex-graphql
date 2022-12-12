@@ -1,7 +1,64 @@
+import { useQuery } from "@tanstack/react-query";
+import { gql } from "graphql-request";
+import { GraphQLResponse } from "graphql-request/dist/types";
 import Head from "next/head";
 import Image from "next/image";
+import { FC } from "react";
 
-export default function Home() {
+import graphqlRequestClient from "../src/lib/GraphqlRequestClient";
+import { SpaceXPast } from "../src/lib/interfaces/SpaceXPast";
+
+const GET_ALL_LAUNCHES = gql`
+  query {
+    launchesPast(limit: 10) {
+      mission_name
+      launch_date_local
+      launch_site {
+        site_name_long
+      }
+      links {
+        article_link
+        video_link
+      }
+      rocket {
+        rocket_name
+        first_stage {
+          cores {
+            flight
+            core {
+              reuse_count
+              status
+            }
+          }
+        }
+        second_stage {
+          payloads {
+            payload_type
+            payload_mass_kg
+            payload_mass_lbs
+          }
+        }
+      }
+      ships {
+        name
+        home_port
+        image
+      }
+    }
+  }
+`;
+
+const Home: FC = () => {
+  const { isLoading, error, data } = useQuery<
+    GraphQLResponse,
+    Error,
+    SpaceXPast[]
+  >(["launches"], async () => {
+    return graphqlRequestClient.request(GET_ALL_LAUNCHES);
+  });
+
+  console.log("data", data);
+
   return (
     <div className="">
       <Head>
@@ -14,4 +71,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Home;
