@@ -114,7 +114,7 @@ const Home: FC = () => {
         <h3 className="text-4xl text-center mt-5 text-gray-700 font-bold">
           SpaceX Past Launches
         </h3>
-        <div className="search w-1/2 mx-auto mt-8 relative">
+        <div className="search w-full lg:w-1/2 mx-auto mt-8 relative">
           <input
             type="text"
             placeholder="Search SpaceX Luanches By Name"
@@ -134,7 +134,7 @@ const Home: FC = () => {
             )}
           </button>
         </div>
-        <div className="grid grid-cols-3 mt-10 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 mt-10 gap-8">
           {isLoading ? (
             <>
               <CardSkeleton />
@@ -151,7 +151,7 @@ const Home: FC = () => {
                 <h2 className="text-blue-700 text-center mb-2">
                   {item?.launch_site?.site_name_long}
                 </h2>
-                <h2 className="text-white text-center  mb-2">
+                <h2 className="text-white text-center mb-2">
                   {format(new Date(item?.launch_date_local), "yyyy-MM-dd")}
                 </h2>
                 <div className=" my-3">

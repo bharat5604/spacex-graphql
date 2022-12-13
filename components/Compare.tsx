@@ -56,7 +56,7 @@ export default function Compare({ openModal, isOpen, closeModal, data }: any) {
                     </button>
                   </div>
                   <div className="mt-6">
-                    <div className="flex justify-between">
+                    <div className="flex flex-col gap-4 lg:gap-0 lg:flex-row justify-between">
                       <div className="w-full">
                         <select
                           name=""
