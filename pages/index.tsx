@@ -11,57 +11,65 @@ import graphqlRequestClient from "../src/lib/GraphqlRequestClient";
 import { SpaceXPast } from "../src/lib/interfaces/SpaceXPast";
 import Compare from "../components/Compare";
 
-const GET_ALL_LAUNCHES = gql`
-  query {
-    launchesPast(limit: 10) {
-      id
-      mission_name
-      launch_date_local
-      launch_site {
-        site_name_long
-      }
-      links {
-        article_link
-        video_link
-      }
-      rocket {
-        rocket_name
-        first_stage {
-          cores {
-            flight
-            core {
-              reuse_count
-              status
+const Home: FC = () => {
+  let [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const GET_ALL_LAUNCHES = gql`
+    query {
+      launchesPast(limit: 10, find: { mission_name:${JSON.stringify(
+        search
+      )} }) {
+        id
+        mission_name
+        launch_date_local
+        launch_site {
+          site_name_long
+        }
+        links {
+          article_link
+          video_link
+        }
+        rocket {
+          rocket_name
+          first_stage {
+            cores {
+              flight
+              core {
+                reuse_count
+                status
+              }
+            }
+          }
+          second_stage {
+            payloads {
+              payload_type
+              payload_mass_kg
+              payload_mass_lbs
             }
           }
         }
-        second_stage {
-          payloads {
-            payload_type
-            payload_mass_kg
-            payload_mass_lbs
-          }
+        ships {
+          name
+          home_port
+          image
         }
       }
-      ships {
-        name
-        home_port
-        image
-      }
     }
-  }
-`;
-
-const Home: FC = () => {
-  let [isOpen, setIsOpen] = useState(false);
-
-  const { isLoading, error, data } = useQuery<
+  `;
+  const { isLoading, error, data, refetch } = useQuery<
     GraphQLResponse,
     Error,
     SpaceXPast[]
   >(["launches"], async () => {
     return graphqlRequestClient.request(GET_ALL_LAUNCHES);
   });
+
+  const handleSearch = async () => {
+    setLoading(true);
+    await refetch();
+    setLoading(false);
+  };
 
   // const { launchesPast } = data;
 
@@ -103,8 +111,28 @@ const Home: FC = () => {
         <h3 className="text-4xl text-center mt-5 text-gray-700 font-bold">
           SpaceX Past Launches
         </h3>
+        <div className="search w-1/2 mx-auto mt-8 relative">
+          <input
+            type="text"
+            placeholder="Search SpaceX Luanches"
+            className="bg-white w-full h-10 rounded-2xl outline-none px-4 shadow-lg"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button
+            onClick={() => handleSearch()}
+            className="absolute bg-blue-600 h-10 text-white font-bold rounded-2xl px-6 right-0"
+          >
+            Search
+            {loading && (
+              <div
+                className="spinner-border ml-1 animate-spin inline-block w-4 h-5 border-4 rounded-full"
+                role="status"
+              ></div>
+            )}
+          </button>
+        </div>
         <div className="grid grid-cols-3 mt-10 gap-8">
-          {isLoading ? (
+          {isLoading || loading ? (
             <>
               <CardSkeleton />
               <CardSkeleton />
