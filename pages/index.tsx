@@ -109,7 +109,7 @@ const Home: FC = () => {
       <div className="px-8 py-6 bg-black min-h-screen">
         <h1 className="text-4xl text-center text-gray-700 font-bold">SpaceX</h1>
         <h3 className="text-4xl text-center mt-5 text-gray-700 font-bold">
-          SpaceX Past Launches
+          SpaceX Past Launches By Name
         </h3>
         <div className="search w-1/2 mx-auto mt-8 relative">
           <input
