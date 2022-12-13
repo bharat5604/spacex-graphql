@@ -15,11 +15,12 @@ const Home: FC = () => {
   let [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [pagination, setPagination] = useState(10);
   const GET_ALL_LAUNCHES = gql`
     query {
-      launchesPast(limit: 10, find: { mission_name:${JSON.stringify(
-        search
-      )} }) {
+      launchesPast(limit: ${JSON.stringify(
+        pagination
+      )}, find: { mission_name:${JSON.stringify(search)} }) {
         id
         mission_name
         launch_date_local
@@ -132,7 +133,7 @@ const Home: FC = () => {
           </button>
         </div>
         <div className="grid grid-cols-3 mt-10 gap-8">
-          {isLoading || loading ? (
+          {isLoading ? (
             <>
               <CardSkeleton />
               <CardSkeleton />
@@ -170,6 +171,25 @@ const Home: FC = () => {
               </div>
             ))
           )}
+        </div>
+        <div className="load mt-4 text-center">
+          <button
+            onClick={async () => {
+              await setPagination(() => pagination + 10);
+              setLoading(true);
+              await refetch();
+              setLoading(false);
+            }}
+            className="bg-yellow-600 p-2 px-6 rounded-2xl font-bold text-xl text-gray-900 drop-shadow-xl"
+          >
+            Load More
+            {loading && (
+              <div
+                className="spinner-border ml-1 animate-spin inline-block w-4 h-5 border-4 rounded-full"
+                role="status"
+              ></div>
+            )}
+          </button>
         </div>
       </div>
 
