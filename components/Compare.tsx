@@ -3,8 +3,8 @@ import { compareAsc, format } from "date-fns";
 import { Fragment, useState } from "react";
 
 export default function Compare({ openModal, isOpen, closeModal, data }: any) {
-  const [compareLeft, setCompareLeft] = useState({});
-  const [compareRight, setCompareRight] = useState({});
+  const [compareLeft, setCompareLeft] = useState<any>({});
+  const [compareRight, setCompareRight] = useState<any>({});
   console.log("data1111", data);
 
   return (
@@ -99,6 +99,7 @@ export default function Compare({ openModal, isOpen, closeModal, data }: any) {
                                 <a
                                   href={compareLeft?.links?.video_link}
                                   target="_blank"
+                                  rel="noreferrer"
                                   className="text-blue-600"
                                 >
                                   {" "}
@@ -109,22 +110,24 @@ export default function Compare({ openModal, isOpen, closeModal, data }: any) {
                                 Ships
                               </h2>
                               <div className="grid grid-cols-1 text-left gap-4 ">
-                                {compareLeft?.ships?.map((ship: any) => (
-                                  <div className="">
-                                    <div className="bg-gray-600 shadow-2xl rounded-2xl p-4">
-                                      <h2 className="text-white">
-                                        {" "}
-                                        <strong>Name</strong> : {ship?.name}
-                                      </h2>
-                                      <h2 className="text-white">
-                                        {" "}
-                                        <strong>Home Port</strong> :{" "}
-                                        {ship?.home_port}
-                                      </h2>
-                                      <img src={`/${ship?.image}`} alt="" />
+                                {compareLeft?.ships?.map(
+                                  (ship: any, index: number) => (
+                                    <div className="" key={index}>
+                                      <div className="bg-gray-600 shadow-2xl rounded-2xl p-4">
+                                        <h2 className="text-white">
+                                          {" "}
+                                          <strong>Name</strong> : {ship?.name}
+                                        </h2>
+                                        <h2 className="text-white">
+                                          {" "}
+                                          <strong>Home Port</strong> :{" "}
+                                          {ship?.home_port}
+                                        </h2>
+                                        <img src={`/${ship?.image}`} alt="" />
+                                      </div>
                                     </div>
-                                  </div>
-                                ))}
+                                  )
+                                )}
                               </div>
                               <div className=" my-3"></div>
                             </div>
@@ -175,6 +178,7 @@ export default function Compare({ openModal, isOpen, closeModal, data }: any) {
                                 <a
                                   href={compareRight?.links?.video_link}
                                   target="_blank"
+                                  rel="noreferrer"
                                   className="text-blue-600"
                                 >
                                   {" "}
@@ -185,22 +189,24 @@ export default function Compare({ openModal, isOpen, closeModal, data }: any) {
                                 Ships
                               </h2>
                               <div className="grid grid-cols-1 text-left gap-4 ">
-                                {compareRight?.ships?.map((ship: any) => (
-                                  <div className="">
-                                    <div className="bg-gray-600 shadow-2xl rounded-2xl p-4">
-                                      <h2 className="text-white">
-                                        {" "}
-                                        <strong>Name</strong> : {ship?.name}
-                                      </h2>
-                                      <h2 className="text-white">
-                                        {" "}
-                                        <strong>Home Port</strong> :{" "}
-                                        {ship?.home_port}
-                                      </h2>
-                                      <img src={`/${ship?.image}`} alt="" />
+                                {compareRight?.ships?.map(
+                                  (ship: any, index: number) => (
+                                    <div className="" key={index}>
+                                      <div className="bg-gray-600 shadow-2xl rounded-2xl p-4">
+                                        <h2 className="text-white">
+                                          {" "}
+                                          <strong>Name</strong> : {ship?.name}
+                                        </h2>
+                                        <h2 className="text-white">
+                                          {" "}
+                                          <strong>Home Port</strong> :{" "}
+                                          {ship?.home_port}
+                                        </h2>
+                                        <img src={`/${ship?.image}`} alt="" />
+                                      </div>
                                     </div>
-                                  </div>
-                                ))}
+                                  )
+                                )}
                               </div>
                               <div className=" my-3"></div>
                             </div>

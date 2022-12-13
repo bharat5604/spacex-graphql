@@ -7,7 +7,7 @@ import { FC, useState } from "react";
 import YouTube from "react-youtube";
 import CardSkeleton from "../components/CardSkeleton";
 import { compareAsc, format } from "date-fns";
-import graphqlRequestClient from "../src/lib/GraphqlRequestClient";
+import graphqlRequestClient from "../src/lib/graphqlRequestClient";
 import { SpaceXPast } from "../src/lib/interfaces/SpaceXPast";
 import Compare from "../components/Compare";
 
@@ -61,7 +61,7 @@ const Home: FC = () => {
   const { isLoading, error, data, refetch } = useQuery<
     GraphQLResponse,
     Error,
-    SpaceXPast[]
+    SpaceXPast
   >(["launches"], async () => {
     return graphqlRequestClient.request(GET_ALL_LAUNCHES);
   });
@@ -74,7 +74,6 @@ const Home: FC = () => {
 
   // const { launchesPast } = data;
 
-  console.log("data", data);
   const opts = {
     height: "100%",
     width: "100%",
