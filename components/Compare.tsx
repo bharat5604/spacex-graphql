@@ -5,7 +5,7 @@ import { Fragment, useState } from "react";
 export default function Compare({ openModal, isOpen, closeModal, data }: any) {
   const [compareLeft, setCompareLeft] = useState<any>({});
   const [compareRight, setCompareRight] = useState<any>({});
-  console.log("data1111", data);
+  // console.log("data1111", data);
 
   return (
     <>

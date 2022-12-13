@@ -95,7 +95,7 @@ const Home: FC = () => {
 
   function openModal() {
     setIsOpen(true);
-    console.log("hello");
+    // console.log("hello");
   }
 
   return (
