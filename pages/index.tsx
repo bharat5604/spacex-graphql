@@ -121,7 +121,7 @@ const Home: FC = () => {
           />
           <button
             onClick={() => handleSearch()}
-            className="absolute bg-blue-600 h-10 text-white font-bold rounded-2xl px-6 right-0"
+            className="absolute bg-yellow-600 h-10 text-gray-900 font-bold rounded-2xl px-6 right-0"
           >
             Search
             {loading && (
