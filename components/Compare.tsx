@@ -96,7 +96,14 @@ export default function Compare({ openModal, isOpen, closeModal, data }: any) {
                               </h2>
                               <h2 className="text-white">
                                 Video URL :
-                                <span> {compareLeft?.links?.video_link}</span>
+                                <a
+                                  href={compareLeft?.links?.video_link}
+                                  target="_blank"
+                                  className="text-blue-600"
+                                >
+                                  {" "}
+                                  {compareLeft?.links?.video_link}
+                                </a>
                               </h2>
                               <h2 className="font-bold text-3xl text-white my-4 text-center">
                                 Ships
@@ -165,7 +172,14 @@ export default function Compare({ openModal, isOpen, closeModal, data }: any) {
                               </h2>
                               <h2 className="text-white">
                                 Video URL :
-                                <span> {compareRight?.links?.video_link}</span>
+                                <a
+                                  href={compareRight?.links?.video_link}
+                                  target="_blank"
+                                  className="text-blue-600"
+                                >
+                                  {" "}
+                                  {compareRight?.links?.video_link}
+                                </a>
                               </h2>
                               <h2 className="font-bold text-3xl text-white my-4 text-center">
                                 Ships
