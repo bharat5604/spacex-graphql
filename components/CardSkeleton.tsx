@@ -7,6 +7,18 @@ const CardSkeleton = () => {
       <h1 className="text-white">
         <Skeleton />
       </h1>
+      <h1 className="text-white text-center font-bold mb-2">
+        <Skeleton />
+      </h1>
+      <h2 className="text-blue-700 text-center mb-2">
+        <Skeleton />
+      </h2>
+      <h2 className="text-white text-center  mb-2">
+        <Skeleton />
+      </h2>
+      <div className=" my-3">
+        <Skeleton />
+      </div>
     </div>
   );
 };

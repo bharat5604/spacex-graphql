@@ -105,7 +105,12 @@ const Home: FC = () => {
         </h3>
         <div className="grid grid-cols-4 mt-10 gap-8">
           {isLoading ? (
-            <CardSkeleton />
+            <>
+              <CardSkeleton />
+              <CardSkeleton />
+              <CardSkeleton />
+              <CardSkeleton />
+            </>
           ) : (
             data?.launchesPast?.map((item: any, index: number) => (
               <div className="shadow p-3 rounded-lg bg-gray-900" key={index}>
@@ -119,17 +124,6 @@ const Home: FC = () => {
                   {format(new Date(item?.launch_date_local), "yyyy-MM-dd")}
                 </h2>
                 <div className=" my-3">
-                  {/* <iframe src={`${item?.links?.video_link}`}></iframe> */}
-                  {/* <iframe
-                    // src="https://www.youtube.com/embed/4WXs3sKu41I"
-                    src={`${item?.links?.video_link}`}
-                    className="w-full rounded-lg"
-                  ></iframe> */}
-                  {/* <YouTube
-                    videoId={item?.links?.video_link.split("/")[3]}
-                    opts={opts}
-                    onReady={(event) => _onReady(event)}
-                  /> */}
                   <video className="w-full rounded-xl h-[200px] mt-4" controls>
                     <source
                       src={`${item?.links?.video_link}`}
