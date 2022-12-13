@@ -173,23 +173,27 @@ const Home: FC = () => {
           )}
         </div>
         <div className="load mt-4 text-center">
-          <button
-            onClick={async () => {
-              await setPagination(() => pagination + 10);
-              setLoading(true);
-              await refetch();
-              setLoading(false);
-            }}
-            className="bg-yellow-600 p-2 px-6 rounded-2xl font-bold text-xl text-gray-900 drop-shadow-xl"
-          >
-            Load More
-            {loading && (
-              <div
-                className="spinner-border ml-1 animate-spin inline-block w-4 h-5 border-4 rounded-full"
-                role="status"
-              ></div>
-            )}
-          </button>
+          {data?.launchesPast[0]?.id ? (
+            <button
+              onClick={async () => {
+                await setPagination(() => pagination + 10);
+                setLoading(true);
+                await refetch();
+                setLoading(false);
+              }}
+              className="bg-yellow-600 p-2 px-6 rounded-2xl font-bold text-xl text-gray-900 drop-shadow-xl"
+            >
+              Load More
+              {loading && (
+                <div
+                  className="spinner-border ml-1 animate-spin inline-block w-4 h-5 border-4 rounded-full"
+                  role="status"
+                ></div>
+              )}
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
 
