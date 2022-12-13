@@ -103,7 +103,7 @@ const Home: FC = () => {
         <h3 className="text-4xl text-center mt-5 text-gray-700 font-bold">
           SpaceX Past Launches
         </h3>
-        <div className="grid grid-cols-4 mt-10 gap-8">
+        <div className="grid grid-cols-3 mt-10 gap-8">
           {isLoading ? (
             <>
               <CardSkeleton />
